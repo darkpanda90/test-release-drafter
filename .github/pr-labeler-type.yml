@@ -1,0 +1,7 @@
+'type: feature': ['feature/*', 'feat/*']
+'type: bug': ['fix/*', 'bug/*']
+'type: doc': doc/*
+'type: breaking': breaking/*
+'type: maintenance': maintenance/*
+'type: misc': misc/*
+'type: dependencies': ['dependency/*','deps/*']
