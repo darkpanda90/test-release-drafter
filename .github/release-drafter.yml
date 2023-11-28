@@ -41,8 +41,5 @@ version-resolver:
 # include-paths:
 #   - 'sdk/data-platform-sdk'
 
-# include-labels:
-#   - 'data-platform-sdk'
-
-exclude-labels:
- - 'skip-changelog' # Dummy label to include all the labels from the pr
+include-labels:
+  - 'nodejs-test'
