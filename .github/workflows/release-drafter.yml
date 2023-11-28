@@ -27,7 +27,7 @@ jobs:
       - name: Get PR labels as env variable
         run: echo "labels=$(gh pr list --search $COMMIT_SHA --state merged --json labels --jq '.[] | .labels[].name' | tr '\n' ',')" >> $GITHUB_ENV
       - name: Draft Release
-        uses: release-drafter/release-drafter@v5
+        uses: release-drafter/release-drafter@v5.25.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           prerelease_bool: ${{ contains(env.labels, env.type_breaking) }}
