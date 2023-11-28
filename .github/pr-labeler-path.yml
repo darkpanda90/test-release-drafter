@@ -1,0 +1,7 @@
+# Add 'repo' label to any root file changes
+repo:
+- '*'
+
+nodejs-test:
+  - nodejs-test/*
+  - nodejs-test/**/*

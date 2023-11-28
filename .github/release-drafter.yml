@@ -1,0 +1,48 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+template: |
+  ## What’s Changed in Data Platform SDK
+
+  $CHANGES
+
+categories:
+  - title: '🔥 Breaking'
+    label: 'type: breaking'
+  - title: '🚀 Features'
+    label: 'type: feature'
+  - title: '🐛 Bug Fixes'
+    label: 'type: bug'
+  - title: '🚑️ Maintenance'
+    label: 'type: maintenance'
+  - title: '📝 Documentation'
+    label: 'type: docs'
+  - title: '✨ Other changes'
+    label: 'type: misc'
+  - title: '📌 Dependency Updates'
+    label: 'type: dependencies'
+    collapse-after: 5
+
+version-resolver:
+  major:
+    labels:
+      - 'type: breaking'
+  minor:
+    labels:
+      - 'type: feature'
+  patch:
+    labels:
+      - 'type: bug'
+      - 'type: maintenance'
+      - 'type: docs'
+      - 'type: dependencies'
+      - 'type: security'
+      - 'type: misc'
+
+# include-paths:
+#   - 'sdk/data-platform-sdk'
+
+# include-labels:
+#   - 'data-platform-sdk'
+
+exclude-labels:
+ - 'skip-changelog' # Dummy label to include all the labels from the pr

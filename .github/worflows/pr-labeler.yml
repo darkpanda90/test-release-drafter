@@ -1,0 +1,31 @@
+name: PR Labeler by path
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pr-labeler-by-path:
+    permissions:
+      contents: read 
+      pull-requests: write 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/pr-labeler-path.yml
+          sync-labels: true
+          dot: true
+  pr-labeler-by-type:
+    needs: pr-labeler-by-path
+    permissions:
+      contents: read 
+      pull-requests: write 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TimonVS/pr-labeler-action@v4
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          configuration-path: .github/pr-labeler-type.yml
