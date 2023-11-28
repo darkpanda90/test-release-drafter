@@ -5,3 +5,4 @@ console.log("Hello world v2!");
 console.log("Hello world v3!");
 console.log("Hello world v4!");
 console.log("Hello world v5!");
+console.log("Hello world v6!");
