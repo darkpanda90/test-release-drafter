@@ -42,7 +42,7 @@ jobs:
           new_version: ${{ steps.draft_release.outputs.resolved_version }}
         run: |
           echo "Updating package.json version to $new_version"
-          npm version --newVersion $new_version --git-tag-version false
+          npm version --newVersion $new_version --git-tag-version false --allow-same-version true
         
       - name: check if package.json changed
         id: check_changes
