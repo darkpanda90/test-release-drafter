@@ -48,9 +48,9 @@ jobs:
         id: check_changes
         working-directory: ./nodejs-test
         run: |
-          git diff --quiet
+          echo "changed_file=$(git diff --name-only)" >> $GITHUB_ENV
       - name: Commit package.json
-        if: ${{ failure() }}
+        if: ${{ env.chnaged_file == 'package.json' }}
         working-directory: ./nodejs-test
         run: |
           git config user.name "GitHub Actions"
