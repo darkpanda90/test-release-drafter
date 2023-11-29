@@ -46,9 +46,10 @@ jobs:
         
       - name: check if package.json changed
         id: check_changes
+        continue-on-error: true
         run: |
           git diff --exit-code --quiet -- nodejs-test/package.json
-          echo "changed=$(if [ $? -eq 1 ]; then echo true; else echo false; fi)" >> "$GITHUB_OUTPUT"  
+          echo "changed=$(if [ $? -eq 1 ]; then echo true; else echo false; fi)" >> "$GITHUB_OUTPUT" 
       - name: Commit package.json
         if: steps.check_changes.outputs.changed == 'true'
         working-directory: ./nodejs-test

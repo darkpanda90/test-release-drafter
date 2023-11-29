@@ -39,7 +39,7 @@ version-resolver:
       - 'type: misc'
 
 include-paths:
-  - 'nodejs-test/*'
+  - 'nodejs-test'
 
 # include-labels:
 #   - 'nodejs-test'
