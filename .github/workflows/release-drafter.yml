@@ -47,7 +47,6 @@ jobs:
       - name: check if package.json changed
         id: check_changes
         working-directory: ./nodejs-test
-        continue-on-error: true
         run: |
           git diff --quiet
       - name: Commit package.json
