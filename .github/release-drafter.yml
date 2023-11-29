@@ -38,8 +38,8 @@ version-resolver:
       - 'type: security'
       - 'type: misc'
 
-# include-paths:
-#   - 'sdk/data-platform-sdk'
+include-paths:
+  - 'nodejs-test/*'
 
-include-labels:
-  - 'nodejs-test'
+# include-labels:
+#   - 'nodejs-test'
