@@ -23,10 +23,11 @@ jobs:
       COMMIT_SHA: ${{ github.sha }}
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Get PR labels as env variable
         run: echo "labels=$(gh pr list --search $COMMIT_SHA --state merged --json labels --jq '.[] | .labels[].name' | tr '\n' ',')" >> $GITHUB_ENV
       - name: Draft Release
+        id: draft_release
         uses: release-drafter/release-drafter@v5.25.0
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -34,5 +35,27 @@ jobs:
         with:
           prerelease: ${{ env.prerelease_bool }}
           prerelease-identifier: 'beta'
+
+      - name: Update sdk package.json version
+        working-directory: ./nodejs-test
+        env:
+          new_version: ${{ steps.draft_release.outputs.resolved_version }}
+        run: |
+          echo "Updating package.json version to $new_version"
+          npm version --newVersion $new_version --git-tag-version false
         
+      - name: check if package.json changed
+        id: check_changes
+        run: |
+          git diff --exit-code --quiet -- nodejs-test/package.json
+          echo "changed=$(if [ $? -eq 1 ]; then echo true; else echo false; fi)" >> "$GITHUB_OUTPUT"  
+      - name: Commit package.json
+        if: steps.check_changes.outputs.changed == 'true'
+        working-directory: ./nodejs-test
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add package.json
+          git commit -m "Bumped package version to $new_version"
+          git push origin HEAD:main
           
