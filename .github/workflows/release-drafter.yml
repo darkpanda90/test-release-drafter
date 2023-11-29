@@ -50,9 +50,8 @@ jobs:
         continue-on-error: true
         run: |
           git diff --quiet
-          echo "changed=$?" >> "$GITHUB_OUTPUT" 
       - name: Commit package.json
-        if: steps.check_changes.outputs.changed == '1'
+        if: ${{ failure() }}
         working-directory: ./nodejs-test
         run: |
           git config user.name "GitHub Actions"
